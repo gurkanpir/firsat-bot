@@ -27,3 +27,10 @@ while True:
         time.sleep(300)
     except Exception as e:
         print(e)
+while True:
+    try:
+        kontrol_et()
+        time.sleep(60)
+    except Exception as e:
+        print("Hata:", e)
+        time.sleep(60)
