@@ -1,37 +1,14 @@
-import requests
-import time
 import os
+import requests
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 
-def telegram_gonder(mesaj):
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-    requests.post(url, data={"chat_id": CHAT_ID, "text": mesaj})
+url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+resp = requests.post(url, data={
+    "chat_id": CHAT_ID,
+    "text": "TEST MESAJI ✅"
+})
 
-def ilanlari_cek():
-    url = "https://www.sahibinden.com/otomobil"
-    headers = {"User-Agent": "Mozilla/5.0"}
-    r = requests.get(url, headers=headers)
-    return r.text
-
-def kontrol_et():
-    telegram_gonder("BOT ÇALIŞIYOR ✅")
-    data = ilanlari_cek()
-    
-    if "Clio" in data or "Egea" in data or "Corolla" in data:
-        telegram_gonder("🚗 FIRSAT ARAÇ BULUNDU! Sahibinden kontrol et!")
-
-while True:
-    try:
-        kontrol_et()
-        time.sleep(300)
-    except Exception as e:
-        print(e)
-while True:
-    try:
-        kontrol_et()
-        time.sleep(60)
-    except Exception as e:
-        print("Hata:", e)
-        time.sleep(60)
+print(resp.status_code)
+print(resp.text)
