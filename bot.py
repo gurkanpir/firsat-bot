@@ -16,6 +16,7 @@ def ilanlari_cek():
     return r.text
 
 def kontrol_et():
+    telegram_gonder("BOT ÇALIŞIYOR ✅")
     data = ilanlari_cek()
     
     if "Clio" in data or "Egea" in data or "Corolla" in data:
